@@ -24,16 +24,14 @@
           <el-menu
             default-active="2"
             class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
             background-color='#eeeeee'
-            unique-opened	=true>
+            :unique-opened	='true' router theme="dark">
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-film"></i>
                 <span>首页内容展示管理</span>
               </template>
-                <el-menu-item index="1-1">首页轮播图管理</el-menu-item>
+                <el-menu-item index="/bannerList">首页轮播图管理</el-menu-item>
                 <el-menu-item index="1-2">首页官方推荐管理</el-menu-item>
             </el-submenu>
             <el-submenu index="2">
@@ -81,7 +79,14 @@
 
 <script>
 export default {
-
+  methods:{
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    }
+  }
 }
 </script>
 
