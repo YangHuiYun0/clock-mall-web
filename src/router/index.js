@@ -9,6 +9,8 @@ const main = r => require.ensure([], () => r(require('@/page/main')), 'main');
 const home = r => require.ensure([], () => r(require('@/page/home')), 'home');
 const bannerList = r => require.ensure([], () => r(require('@/page/home-set/bannerList')), 'bannerList');
 const bannerDetails = r => require.ensure([], () => r(require('@/page/home-set/bannerDetails')), 'bannerDetails');
+const goodsList = r => require.ensure([], () => r(require('@/page/goods-manage/goodsList')), 'goodsList');
+const goodsDetails = r => require.ensure([], () => r(require('@/page/goods-manage/goodsDetails')), 'goodsDetails');
 
 const routes = [
   {
@@ -31,6 +33,14 @@ const routes = [
       },{
         path: '/bannerDetails',
         component: bannerDetails,
+        meta: [],
+      },{
+        path: '/goodsList',
+        component: goodsList,
+        meta: [],
+      },{
+        path: '/goodsDetails',
+        component: goodsDetails,
         meta: [],
       }
     ]

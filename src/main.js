@@ -5,6 +5,10 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
+// 自定义组件
+import Breadcrumb from './components/breadcrumb/index';
+
+Vue.component('Breadcrumb', Breadcrumb);
 
 Vue.config.productionTip = false
 Vue.use(ElementUI);

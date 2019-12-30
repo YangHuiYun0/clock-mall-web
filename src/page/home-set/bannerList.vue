@@ -1,15 +1,16 @@
 <template>
 <!-- 首页轮播图管理 -->
   <div>
-    <h3 id="page-title">{{parentName}}</h3>
+    <!-- <h3 id="page-title">{{parentName}}</h3> -->
+    <Breadcrumb :level-list="breadCrumbList"></Breadcrumb>
     <el-card>
       <div style="margin-bottom:20px">
         <el-button  type="primary" class="el-icon-plus" size="small"
                   @click="addBanner()">增加轮播图</el-button><span class="tip">&nbsp;&nbsp;最多5条</span>
       </div>
       <el-table :data="bannerData" v-loading="dataListLoading" ref="eltable">
-      <el-table-column label="序号"  type="index"  width="50" align="center">
-      </el-table-column>
+        <el-table-column label="序号"  type="index"  width="50" align="center">
+        </el-table-column>
         <el-table-column label="轮播图名字" align="center" prop="bannerName" >
           <template slot-scope="scope">
             {{scope.row.bannerName}}
@@ -23,6 +24,20 @@
         <el-table-column label="排序" align="center" prop="sort" >
           <template slot-scope="scope">
             {{scope.row.sort}}
+          </template>
+        </el-table-column>
+        <el-table-column label="状态" align="center" prop="status" >
+          <template slot-scope="scope">
+             <el-tag
+              :key="scope.row.id"
+              class="el-tag el-tag--dark"
+              :class="[{
+                'el-tag--danger': scope.row.status === 0,
+                'el-tag--success': scope.row.status === 1,
+              }]"
+              effect="plain">
+              {{scope.row.status===1?'启用':'停用'}}
+            </el-tag>
           </template>
         </el-table-column>
         <el-table-column label="操作" width="150" align="center">
@@ -42,8 +57,9 @@
 export default {
   data(){
     return{
+      breadCrumbList: [{ title: '首页轮播图列表'}],
       dataListLoading:false,
-      bannerData:[{bannerName:'劳伦手表',bannerUrl:'',sort:'1'}],
+      bannerData:[{bannerName:'劳伦手表',bannerUrl:'',sort:'1',status:1}],
       parentName:'首页轮播图管理'
     }
   },

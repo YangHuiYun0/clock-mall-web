@@ -40,7 +40,7 @@
                 <span>商品管理</span>
               </template>
                 <el-menu-item index="2-1">分类管理</el-menu-item>
-                <el-menu-item index="2-2">商品列表</el-menu-item>
+                <el-menu-item index="/goodsList">商品列表</el-menu-item>
                 <el-menu-item index="2-3">品牌管理</el-menu-item>
             </el-submenu>
             <el-submenu index="3">
