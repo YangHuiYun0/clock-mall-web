@@ -160,7 +160,7 @@ export default {
     },
     getInfoList(type){
       if(_type === 'init'){
-        this.path = 0;
+        this.page = 0;
       }
       const that = this;
       var id = '';//所点击的节点的id
@@ -428,6 +428,7 @@ export default {
 
   .el-tree--highlight-current .el-tree-node.is-current>.el-tree-node__content {
     // background-color: #f0f7ff;
-    width: 6em;}
+    width: 6em;
+     }
 
 </style>

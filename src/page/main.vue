@@ -41,14 +41,14 @@
               </template>
                 <el-menu-item index="2-1">分类管理</el-menu-item>
                 <el-menu-item index="/goodsList">商品列表</el-menu-item>
-                <el-menu-item index="2-3">品牌管理</el-menu-item>
+                <el-menu-item index="/brandList">品牌管理</el-menu-item>
             </el-submenu>
             <el-submenu index="3">
               <template slot="title">
                 <i class="el-icon-s-order"></i>
                 <span>订单管理</span>
               </template>
-                <el-menu-item index="3-1">订单列表</el-menu-item>
+                <el-menu-item index="/orderList">订单列表</el-menu-item>
             </el-submenu>
             <el-submenu index="4">
               <template slot="title">

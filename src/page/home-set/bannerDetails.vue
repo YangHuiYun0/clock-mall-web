@@ -9,8 +9,8 @@
                     maxlength=12  clearable style="width:400px"></el-input>
                 </el-form-item>
                 <el-form-item >
-                <el-radio v-model="dataForm.status" :label=1 >启用</el-radio>
-                <el-radio v-model="dataForm.status" :label=0>停用</el-radio>
+                    <el-radio v-model="dataForm.status" :label=1 >启用</el-radio>
+                    <el-radio v-model="dataForm.status" :label=0>停用</el-radio>
                 </el-form-item>
                 <el-form-item label="排序" prop="sort">
                     <el-input v-model="dataForm.sort" placeholder="请输入排序" show-word-limit 

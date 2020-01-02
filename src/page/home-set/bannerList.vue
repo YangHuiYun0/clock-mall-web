@@ -1,8 +1,7 @@
 <template>
 <!-- 首页轮播图管理 -->
   <div>
-    <!-- <h3 id="page-title">{{parentName}}</h3> -->
-    <Breadcrumb :level-list="breadCrumbList"></Breadcrumb>
+    <h3 id="page-title">首页轮播图列表</h3>
     <el-card>
       <div style="margin-bottom:20px">
         <el-button  type="primary" class="el-icon-plus" size="small"

@@ -11,7 +11,10 @@ const bannerList = r => require.ensure([], () => r(require('@/page/home-set/bann
 const bannerDetails = r => require.ensure([], () => r(require('@/page/home-set/bannerDetails')), 'bannerDetails');
 const goodsList = r => require.ensure([], () => r(require('@/page/goods-manage/goodsList')), 'goodsList');
 const goodsDetails = r => require.ensure([], () => r(require('@/page/goods-manage/goodsDetails')), 'goodsDetails');
-
+const brandList = r => require.ensure([], () => r(require('@/page/goods-manage/brandList')), 'brandList');
+const brandDetails = r => require.ensure([], () => r(require('@/page/goods-manage/brandDetails')), 'brandDetails');
+const orderList = r => require.ensure([], () => r(require('@/page/order-manage/orderList')), 'orderList');
+const orderDetails = r => require.ensure([], () => r(require('@/page/order-manage/orderDetails')), 'orderDetails');
 const routes = [
   {
     path:'/',
@@ -42,7 +45,24 @@ const routes = [
         path: '/goodsDetails',
         component: goodsDetails,
         meta: [],
-      }
+      },{
+        path:'/brandList',
+        component: brandList,
+        meta: [],
+      },{
+        path: '/brandDetails',
+        component: brandDetails,
+        meta: [],
+      },{
+        path: '/orderList',
+        component: orderList,
+        meta: [],
+      },{
+        path: '/orderDetails',
+        component: orderDetails,
+        meta: [],
+      },
+      
     ]
   }
 ]
