@@ -51,7 +51,7 @@
             {{formatStatus(scope.row.status)}}
           </template>
         </el-table-column>
-        <el-table-column label="操作" width="200" align="center">
+        <el-table-column label="操作" width="250" align="center">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -89,28 +89,25 @@
     <el-dialog
       title="订单详情"
       :visible.sync="dialogVisible"
-      width="50%"
-      :before-close="handleClose">
-      <el-card>
+      width="50%">
         <el-form :model="listItem" ref="listItem"  label-width="150px" :rules="rules">
-          <el-form-item label="订单编号">
+          <el-form-item label="订单编号:">
             {{listItem.orderId}}
           </el-form-item>
-          <el-form-item label="收货人">
+          <el-form-item label="收货人:">
             {{listItem.receiverName}}
           </el-form-item>
-          <el-form-item label="手机号码">
+          <el-form-item label="手机号码:">
             {{listItem.receiverPhone}}
           </el-form-item>
-          <el-form-item label="地址">
+          <el-form-item label="地址:">
             {{listItem.receiverAddress}}
           </el-form-item>
-          <el-form-item label="快递单号" prop="deliverySn">
+          <el-form-item label="快递单号:" prop="deliverySn">
             <el-input v-model="listItem.deliverySn" placeholder="快递单号" show-word-limit maxlength=25
                         clearable></el-input>
           </el-form-item>
         </el-form>
-      </el-card>
       <span slot="footer" class="dialog-footer">
     <el-button @click="dialogVisible = false">取 消</el-button>
     <el-button v-if="listItem.deliverySn" type="primary" @click="formSubmit()">提 交</el-button>
@@ -146,7 +143,7 @@ export default {
         { label: '已关闭', value: 4}
       ],
       dataListLoading:false,
-      orderData:[{}],
+      orderData:[{status:1}],
       listItem:[],
       rules:{
         deliverySn:[

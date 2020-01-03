@@ -1,7 +1,7 @@
 <template>
   <div>
     <h4 id="page-title">我的首页</h4>
-    <el-card>
+    <el-card style="margin-bottom:10px">
       <div class="row">
         <el-row>
           <el-col :span="12" v-for="(item, index) in dataList" :key="index">
@@ -24,6 +24,51 @@
         </el-row>
       </div>
     </el-card>
+    <el-card>
+      <div class="overview-layout">
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <div class="out-border">
+              <div class="layout-title">商品总览</div>
+              <div style="padding: 40px">
+                <el-row>
+                  <el-col :span="6" class="color-danger overview-item-value">100</el-col>
+                  <el-col :span="6" class="color-danger overview-item-value">400</el-col>
+                  <el-col :span="6" class="color-danger overview-item-value">50</el-col>
+                  <el-col :span="6" class="color-danger overview-item-value">500</el-col>
+                </el-row>
+                <el-row class="font-medium">
+                  <el-col :span="6" class="overview-item-title">已下架</el-col>
+                  <el-col :span="6" class="overview-item-title">已上架</el-col>
+                  <el-col :span="6" class="overview-item-title">库存紧张</el-col>
+                  <el-col :span="6" class="overview-item-title">全部商品</el-col>
+                </el-row>
+              </div>
+            </div>
+          </el-col>
+          <el-col :span="12">
+            <div class="out-border">
+              <div class="layout-title">用户总览</div>
+              <div style="padding: 40px">
+                <el-row>
+                  <el-col :span="6" class="color-danger overview-item-value">100</el-col>
+                  <el-col :span="6" class="color-danger overview-item-value">200</el-col>
+                  <el-col :span="6" class="color-danger overview-item-value">1000</el-col>
+                  <el-col :span="6" class="color-danger overview-item-value">5000</el-col>
+                </el-row>
+                <el-row class="font-medium">
+                  <el-col :span="6" class="overview-item-title">今日新增</el-col>
+                  <el-col :span="6" class="overview-item-title">昨日新增</el-col>
+                  <el-col :span="6" class="overview-item-title">本月新增</el-col>
+                  <el-col :span="6" class="overview-item-title">会员总数</el-col>
+                </el-row>
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+      </div>
+    </el-card>
+
   </div>
 </template>
 
@@ -87,6 +132,29 @@ export default {
         color: #c6cad6;
       }
     }
+  }
+  .overview-layout {
+    margin-top: 20px;
+  }
+  .out-border {
+    border: 1px solid #DCDFE6;
+  }
+  .layout-title {
+    color: #606266;
+    padding: 15px 20px;
+    background: #F2F6FC;
+    font-weight: bold;
+  }
+  .overview-item-value {
+    font-size: 24px;
+    text-align: center;
+  }
+  .overview-item-title {
+    margin-top: 10px;
+    text-align: center;
+  }
+  .color-danger {
+    color: #f56c6c;
   }
 </style>>
 

@@ -15,6 +15,10 @@ const brandList = r => require.ensure([], () => r(require('@/page/goods-manage/b
 const brandDetails = r => require.ensure([], () => r(require('@/page/goods-manage/brandDetails')), 'brandDetails');
 const orderList = r => require.ensure([], () => r(require('@/page/order-manage/orderList')), 'orderList');
 const orderDetails = r => require.ensure([], () => r(require('@/page/order-manage/orderDetails')), 'orderDetails');
+const saleSetList = r => require.ensure([], () => r(require('@/page/order-manage/saleSetList')), 'saleSetList');
+const returnApply = r => require.ensure([], () => r(require('@/page/order-manage/returnApply')), 'returnApply');
+const returnApplyDetail = r => require.ensure([], () => r(require('@/page/order-manage/returnApplyDetail')), 'returnApplyDetail');
+const memberList = r => require.ensure([], () => r(require('@/page/member-manage/memberList')), 'memberList');
 const routes = [
   {
     path:'/',
@@ -60,6 +64,22 @@ const routes = [
       },{
         path: '/orderDetails',
         component: orderDetails,
+        meta: [],
+      },{
+        path: '/saleSetList',
+        component: saleSetList,
+        meta: [],
+      },{
+        path: '/returnApply',
+        component: returnApply,
+        meta: [],
+      },{
+        path: '/returnApplyDetail',
+        component: returnApplyDetail,
+        meta: [],
+      },{
+        path: '/memberList',
+        component: memberList,
         meta: [],
       },
       

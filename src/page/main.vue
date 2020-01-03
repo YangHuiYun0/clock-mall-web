@@ -26,6 +26,10 @@
             class="el-menu-vertical-demo"
             background-color='#eeeeee'
             :unique-opened	='true' router theme="dark">
+            <el-menu-item index="/home">
+              <i class="el-icon-s-home"></i>
+              <span slot="title">首页</span>
+            </el-menu-item>
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-film"></i>
@@ -39,7 +43,6 @@
                 <i class="el-icon-s-shop"></i>
                 <span>商品管理</span>
               </template>
-                <el-menu-item index="2-1">分类管理</el-menu-item>
                 <el-menu-item index="/goodsList">商品列表</el-menu-item>
                 <el-menu-item index="/brandList">品牌管理</el-menu-item>
             </el-submenu>
@@ -49,21 +52,15 @@
                 <span>订单管理</span>
               </template>
                 <el-menu-item index="/orderList">订单列表</el-menu-item>
+                <el-menu-item index="/returnApply">退货申请处理</el-menu-item>
+                <el-menu-item index="/saleSetList">退货原因设置</el-menu-item>
             </el-submenu>
             <el-submenu index="4">
               <template slot="title">
                 <i class="el-icon-user-solid"></i>
                 <span>会员管理</span>
               </template>
-                <el-menu-item index="4-1">会员列表</el-menu-item>
-                <el-menu-item index="4-2">删除的会员</el-menu-item>
-            </el-submenu>
-            <el-submenu index="5">
-              <template slot="title">
-                <i class="el-icon-s-data"></i>
-                <span>统计报表</span>
-              </template>
-                <el-menu-item index="5-1">订单销量统计</el-menu-item>
+                <el-menu-item index="/memberList">会员列表</el-menu-item>
             </el-submenu>
           </el-menu>
         </aside>
