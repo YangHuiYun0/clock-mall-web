@@ -12,7 +12,7 @@
         <el-table-column label="序号"  type="index"  width="50" align="center">
         </el-table-column>
         <el-table-column label="原因类型" align="center">
-          <template slot-scope="scope">{{scope.row.name}}</template>
+          <template slot-scope="scope">{{scope.row.causeName}}</template>
         </el-table-column>
         <el-table-column label="排序" width="100" align="center">
           <template slot-scope="scope">{{scope.row.sort }}</template>
@@ -55,8 +55,8 @@
       :visible.sync="dialogVisible" width="30%">
       <el-form :model="returnReason" :rules="rules"
                ref="reasonForm" label-width="150px">
-        <el-form-item label="原因类型：" prop="name">
-          <el-input v-model="returnReason.name" class="input-width"></el-input>
+        <el-form-item label="原因类型：" prop="causeName">
+          <el-input v-model="returnReason.causeName" class="input-width"></el-input>
         </el-form-item>
         <el-form-item label="排序：" prop="sort">
           <el-input v-model="returnReason.sort" class="input-width" 
@@ -95,12 +95,12 @@ export default {
       causeData:[],
       returnReason:{
         id:'',
-        name:'',
+        causeName:'',
         sort:'',
         status:1,
       },
       rules:{
-        name:[
+        causeName:[
           {required: true, message: '请输入退货原因', trigger: 'blur'},
         ],
         sort:[

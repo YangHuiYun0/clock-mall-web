@@ -19,9 +19,9 @@
           <el-col :span="6" class="table-cell-title">订单状态</el-col>
         </el-row>
         <el-row>
-          <el-col :span="6" class="table-cell">{{order.orderSn}}</el-col>
+          <el-col :span="6" class="table-cell">{{order.orderCode}}</el-col>
           <el-col :span="6" class="table-cell">暂无</el-col>
-          <el-col :span="6" class="table-cell">{{order.memberUsername}}</el-col>
+          <el-col :span="6" class="table-cell">{{order.buyUser}}</el-col>
           <el-col :span="6" class="table-cell">{{formatStatus(order.status )}}</el-col>
         </el-row>
       </div>
@@ -51,19 +51,19 @@
         style="width: 100%;margin-top: 20px" border>
         <el-table-column label="商品图片" width="120" align="center">
           <template slot-scope="scope">
-            <img :src="scope.row.productPic" style="height: 80px">
+            <img :src="scope.row.goodsUrl" style="height: 80px">
           </template>
         </el-table-column>
         <el-table-column label="商品名称" align="center">
           <template slot-scope="scope">
-            <p>{{scope.row.productName}}</p>
-            <p>品牌：{{scope.row.productBrand}}</p>
+            <p>{{scope.row.goodsName}}</p>
+            <p>品牌：{{scope.row.goodBrand}}</p>
           </template>
         </el-table-column>
         <el-table-column label="价格/货号" width="120" align="center">
           <template slot-scope="scope">
-            <p>价格：￥{{scope.row.productPrice}}</p>
-            <p>货号：{{scope.row.productSn}}</p>
+            <p>价格：￥{{scope.row.goodsPrice}}</p>
+            <p>货号：{{scope.row.goodsCode}}</p>
           </template>
         </el-table-column>
         <el-table-column label="属性" width="120" align="center">
@@ -73,12 +73,12 @@
         </el-table-column>
         <el-table-column label="数量" width="120" align="center">
           <template slot-scope="scope">
-            {{scope.row.productQuantity}}
+            {{scope.row.buyQuantity}}
           </template>
         </el-table-column>
         <el-table-column label="小计" width="120" align="center">
           <template slot-scope="scope">
-            ￥{{scope.row.productPrice*scope.row.productQuantity}}
+            ￥{{scope.row.goodsPrice*scope.row.buyQuantity}}
           </template>
         </el-table-column>
       </el-table>

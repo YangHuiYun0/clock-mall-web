@@ -147,6 +147,8 @@ export default {
   methods:{
     getDataLabel(type){
       const typeLabel = {
+        goodBrand:'商品品牌',
+        goodsUrl:'商品图片',
         goodsCode:'商品编号',
         categoryName:'商品类别',
         goodsName:'商品名称',

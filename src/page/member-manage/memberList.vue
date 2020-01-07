@@ -19,9 +19,14 @@
             {{scope.row.name}}
           </template>
         </el-table-column>
-        <el-table-column label="注册时间" prop="changeTime" align="center">
+        <el-table-column label="登录名" align="center" prop="loginName" >
           <template slot-scope="scope">
-            {{formatTime(scope.row.changeTime)}}
+            {{scope.row.loginName}}
+          </template>
+        </el-table-column>
+        <el-table-column label="注册时间" prop="registerTime" align="center">
+          <template slot-scope="scope">
+            {{formatTime(scope.row.registerTime)}}
           </template>
         </el-table-column>
         <el-table-column label="手机号" prop="phone" align="center">

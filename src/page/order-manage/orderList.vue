@@ -7,7 +7,7 @@
       <div class="search">
         <el-input v-model="orderCode" clearable placeholder="订单编号" style="width: 250px;"></el-input>
         <el-date-picker
-          v-model="changeTime"
+          v-model="createTime"
           type="date"
           placeholder="选择订单创建日期">
         </el-date-picker>
@@ -31,9 +31,9 @@
             {{scope.row.orderCode}}
           </template>
         </el-table-column>
-        <el-table-column label="创建时间" prop="changeTime" align="center">
+        <el-table-column label="创建时间" prop="createTime" align="center">
           <template slot-scope="scope">
-            {{formatTime(scope.row.changeTime)}}
+            {{formatTime(scope.row.createTime)}}
           </template>
         </el-table-column>
         <el-table-column label="购买用户" align="center" prop="buyUser" >
@@ -92,7 +92,7 @@
       width="50%">
         <el-form :model="listItem" ref="listItem"  label-width="150px" :rules="rules">
           <el-form-item label="订单编号:">
-            {{listItem.orderId}}
+            {{listItem.orderCode}}
           </el-form-item>
           <el-form-item label="收货人:">
             {{listItem.receiverName}}
@@ -129,7 +129,7 @@ export default {
     };
     return{
       orderCode:'',
-      changeTime:'',
+      createTime:'',
       orderStatus:'',
       page:0,
       totalList:0,
@@ -188,7 +188,7 @@ export default {
         page:that.page,
         size:that.pageSize,
         orderCode:that.orderCode,
-        changeTime:that.changeTime,
+        createTime:that.createTime,
         orderStatus:that.orderStatus,
       }).then(res=>{
         if(res && res.code === 200){

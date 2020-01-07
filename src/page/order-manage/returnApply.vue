@@ -21,22 +21,22 @@
           <el-table-column label="序号"  type="index"  width="50" align="center">
           </el-table-column>
             <el-table-column label="订单编号" width="180" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+          <template slot-scope="scope">{{scope.row.orderCode}}</template>
           </el-table-column>
           <el-table-column label="申请时间" width="180" align="center">
             <template slot-scope="scope">{{formatTime(scope.row.createTime)}}</template>
           </el-table-column>
           <el-table-column label="用户账号" align="center">
-            <template slot-scope="scope">{{scope.row.memberUsername}}</template>
+            <template slot-scope="scope">{{scope.row.buyUser}}</template>
           </el-table-column>
           <el-table-column label="退款金额" width="180" align="center">
             <template slot-scope="scope">￥{{scope.row | formatReturnAmount}}</template>
           </el-table-column>
           <el-table-column label="申请状态" width="180" align="center">
-            <template slot-scope="scope">{{scope.row.status | formatStatus}}</template>
+            <template slot-scope="scope">{{scope.row.status }}</template>
           </el-table-column>
           <el-table-column label="处理时间" width="180" align="center">
-            <template slot-scope="scope">{{scope.row.handleTime | formatTime}}</template>
+            <template slot-scope="scope">{{scope.row.updateTime }}</template>
           </el-table-column>
           <el-table-column label="操作" width="180" align="center">
             <template slot-scope="scope">
@@ -101,7 +101,7 @@ export default {
         page:that.page,
         size:that.pageSize,
         orderCode:that.orderCode,
-        Status:that.status,
+        status:that.status,
       }).then(res=>{
         if(res && res.code === 200){
           that.applyData = res.data.rows;
