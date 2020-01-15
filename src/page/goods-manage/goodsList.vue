@@ -24,7 +24,7 @@
                     </span>
                     <span class="comp-tr-node--btns">
                       <!-- 新增 -->
-                      <el-button icon="el-icon-plus" size="mini" circle type="primary" @click="handleAdd(node, data)" v-if="!data.categoryPcode"></el-button>
+                      <!-- <el-button icon="el-icon-plus" size="mini" circle type="primary" @click="handleAdd(node, data)" v-if="!data.categoryPcode"></el-button> -->
                       <el-button icon="el-icon-edit" size="mini" circle type="info"  @click="handleEdit(node, data)"></el-button>
                       <el-button icon="el-icon-delete" size="mini" circle type="danger" @click="handleDelete(node, data)"></el-button>
                     </span>
@@ -105,6 +105,14 @@
 </template>
 
 <script>
+import { 
+  getCategoryList,
+  addCategoryInfo,
+  getCategoryInfo,
+  delCategoryInfo,
+  updateBrandInfo,
+updateCategoryInfo,
+ } from "../../api/goods-manage";
 export default {
   data(){
     return{
@@ -112,14 +120,17 @@ export default {
       breadCrumbList: [{ title: '商品列表'}],
       isLoading: false,// 是否加载
       dialogVisible:false,
-      nodeForm:{},
+      nodeForm:{
+        categoryName:'',
+        categoryDesc:'',
+      },
       setTree:[{id:1,categoryName:'牛奶',children:[{id:1,categoryName:'牛niu奶'}]}],
       defaultProps: {// 默认设置
 				children: 'children',
 				label: 'name'
       },
       NODE_KEY: 'categoryCode',// id对应字段
-			MAX_LEVEL: 2,// 设定最大层级
+			MAX_LEVEL: 1,// 设定最大层级
       NODE_ID_START: 0,// 新增节点id，逐次递减
       
       //商品列表
@@ -141,7 +152,7 @@ export default {
     }
   },
   mounted(){
-    // this.getTreeInfo();
+    this.getTreeInfo();
     // this.getInfoList('init');
   },
   methods:{
@@ -161,7 +172,7 @@ export default {
       return typeLabel[type] || '';
     },
     getInfoList(type){
-      if(_type === 'init'){
+      if(type === 'init'){
         this.page = 0;
       }
       const that = this;
@@ -187,7 +198,7 @@ export default {
     },
     getTreeInfo(){
       const that = this;
-      getTreeList().then(res=>{
+      getCategoryList().then(res=>{
         if(res && res.code === 200){
           that.setTree = res.data;
         }
@@ -242,7 +253,7 @@ export default {
       this.nowEditNodeData = _data;
       this.nowAddPNode = _node;
       const that = this;
-      getNodeType(_data.id).then(res=>{
+      getCategoryInfo(_data.id).then(res=>{
         console.log('编辑的节点',res);
         that.nodeForm = res.data;
       }).catch(err=>{
@@ -289,7 +300,7 @@ export default {
         }
         that.submitLoading = true;
         if(that.nodeForm.id){
-          editNodeType(that.nodeForm.id,that.nodeForm).then(res=>{
+          updateCategoryInfo(that.nodeForm.id,that.nodeForm).then(res=>{
             if(res && res.code === 200){
               that.$message.success('修改商品类别成功');
             }
@@ -298,7 +309,7 @@ export default {
             that.dialogVisible = false;
           }).catch()
         }else{
-          addNodeType(that.nodeForm).then(res=>{
+          addCategoryInfo(that.nodeForm).then(res=>{
             console.log('新增的节点',res);
             if(res && res.code === 200){
               // 为新增节点赋id

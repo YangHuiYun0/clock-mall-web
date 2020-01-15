@@ -24,6 +24,11 @@
             :key="index" :prop="item"
             align="center">
         </el-table-column>
+        <el-table-column label="相关商品数量" width="150" align="center">
+           <template slot-scope="scope">
+             {{scope.row.brandNum?scope.row.brandNum:'暂无数据'}}
+           </template>
+        </el-table-column>
          <el-table-column label="操作" width="200" align="center">
           <template slot-scope="scope">
             <el-button
@@ -51,6 +56,7 @@
 </template>
 
 <script>
+import { getBrandList,delBrandInfo } from "../../api/goods-manage";
 export default {
   data(){
     return{
@@ -58,8 +64,8 @@ export default {
       page:0,
       totalList:0,
       pageSize:12,
-      brandData:[{}],
-      brandTable:['brandId','brandName','brandSort','brandLetter','brandNum'],
+      brandData:[],
+      brandTable:['id','brandName','brandType','brandLetter','createTime'],
       dataListLoading:false,
     }
   },
@@ -69,16 +75,18 @@ export default {
   methods:{
     getDataLabel(type){
       const typeLabel = {
-        brandId:'品牌id',
+        id:'品牌id',
         brandName:'品牌名称',
         brandSort:'品牌排序',
         brandLetter:'品牌首字母',
-        brandNum:'相关商品数量'
+        brandNum:'相关商品数量',
+        createTime:'创建时间',
+        brandType:'品牌归属类型'
       }
       return typeLabel[type] || '';
     },
     getDataList(type){
-      if(_type === 'init'){
+      if(type === 'init'){
         this.page = 0;
       }
       this.dataListLoading = true;
@@ -102,20 +110,20 @@ export default {
     addBrand(id){
       this.$router.push({
         path: '/brandDetails',
-        // query:{id}
+        query:{id}
       });
     },
     delBrand(_row,index){
       const that = this;
-      this.$confirm(`确定对「 ${_row.name} 」进行「 删除 」操作?`, '提示', {
+      this.$confirm(`确定对「 ${_row.brandName} 」进行「 删除 」操作?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        delGoods(id).then(res=>{
+        delBrandInfo(_row.id).then(res=>{
           if(res && res.code === 200){
-            that.$message.success(`删除商品 ${_row.name} 成功`);
-            that.goodsData.splice(index, 1);
+            that.$message.success(`删除商品 ${_row.brandName} 成功`);
+            that.brandData.splice(index, 1);
             that.totalList--;
           }else{
             that.$message.error(res.msg)

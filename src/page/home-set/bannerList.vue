@@ -53,6 +53,7 @@
 </template>
 
 <script>
+import { getBannerList, } from "../../api/home-set";
 export default {
   data(){
     return{
@@ -63,16 +64,16 @@ export default {
     }
   },
   mounted(){
-    // this.getInfo();
+    this.getInfo();
   },
   methods:{
     // 获取列表信息
     getInfo(){
       const that = this;
       this.dataListLoading = true;
-      getBannerList().then(res=>{
+      getBannerList({page:0,size:50}).then(res=>{
         if(res && res.code === 200){
-          that.bannerData = res.data.row;
+          that.bannerData = res.data.rows;
         }else{
           that.$message.error(res.msg)
         }

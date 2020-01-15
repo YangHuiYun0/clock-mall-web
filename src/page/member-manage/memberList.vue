@@ -24,9 +24,9 @@
             {{scope.row.loginName}}
           </template>
         </el-table-column>
-        <el-table-column label="注册时间" prop="registerTime" align="center">
+        <el-table-column label="注册时间" prop="createTime" align="center">
           <template slot-scope="scope">
-            {{formatTime(scope.row.registerTime)}}
+            {{formatTime(scope.row.createTime)}}
           </template>
         </el-table-column>
         <el-table-column label="手机号" prop="phone" align="center">
@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { getmemberList } from "../../api/member-manage";
 import { formatTime } from "../../utils/time";
 export default {
   data(){
@@ -62,7 +63,7 @@ export default {
     }
   },
   mounted(){
-    // this.getDataList('init');
+    this.getDataList('init');
   },
   methods:{
     formatTime(timestmap) {
@@ -77,14 +78,14 @@ export default {
       }
       this.dataListLoading = true;
       const that = this;
-      getMemberList({
+      getmemberList({
         page:that.page,
         size:that.pageSize,
         name:that.name,
         phone:that.phone,
       }).then(res=>{
         if(res && res.code === 200){
-          that.orderData = res.data.rows;
+          that.memberData = res.data.rows;
           that.totalList = res.data.total;
         }else{
           that.$message.error(res.msg);

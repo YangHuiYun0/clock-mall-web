@@ -37,6 +37,7 @@
               @click="addCause(scope.$index, scope.row)">编辑</el-button>
             <el-button
               size="mini"
+              type="danger"
               @click="handleDelete(scope.$index, scope.row)">删除</el-button>
           </template>
         </el-table-column>
@@ -76,6 +77,14 @@
 
 <script>
 import { formatTime } from "../../utils/time";
+import { 
+  getSaleCauseList,
+  addCauseInfo,
+  updateCauseInfo,
+  delCauseInfo,
+  getCauseInfo 
+} from "../../api/order-manage";
+import { getCategoryList } from '../../api/goods-manage';
 export default {
   data(){
     const sortRequire = (rule, value, callback) => {
@@ -111,7 +120,7 @@ export default {
     }
   },
   mounted(){
-    // this.getDataList('init');
+    this.getDataList('init');
   },
   methods:{
     currentChangeHandle(val){
@@ -126,12 +135,12 @@ export default {
       }
       this.dataListLoading = true;
       const that = this;
-      getCauseList({
+      getSaleCauseList({
         page:that.page,
         size:that.pageSize,
       }).then(res=>{
         if(res && res.code === 200){
-          that.orderData = res.data.rows;
+          that.causeData = res.data.rows;
           that.totalList = res.data.total;
         }else{
           that.$message.error(res.msg);
@@ -143,19 +152,30 @@ export default {
     },
     // 修改是否可用状态
     handleStatusChange(index,row){
-
+      const that = this;
+      const _status = row.status;
+      updateCauseInfo(row.id,{
+        status:row.status,
+      }).then(res => {
+        if(res && res.code === 200){
+          that.$message.success('修改状态成功')
+        }else{
+           that.$message.success('修改状态失败');
+           that.causeData[index].status = !_status;//todo 待验证
+        }
+      })
     },
     //删除原因
     handleDelete(index, row){
        const that = this;
-      this.$confirm(`确定对「 ${row.name} 」进行「 删除 」操作?`, '提示', {
+      this.$confirm(`确定对「 ${row.causeName} 」进行「 删除 」操作?`, '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        delCause(id).then(res=>{
+        delCauseInfo(row.id).then(res=>{
           if(res && res.code === 200){
-            that.$message.success(`删除退货原因 ${row.name} 成功`);
+            that.$message.success(`删除退货原因 ${row.causeName} 成功`);
             that.causeData.splice(index, 1);
             that.totalList--;
           }else{
@@ -179,18 +199,19 @@ export default {
     // 保存弹窗内容
     submitForm(){
       const that = this;
-      that.$refs.returnReason.validate(valid => {
+      that.$refs.reasonForm.validate(valid => {
         if (!valid) {
           this.$message.error('请填写完整再保存');
           return false;
         }
         that.submitLoading = true;
-        const submitFun = that.returnReason.id ? editCause : addCause;
+        const submitFun = that.returnReason.id ? updateCauseInfo : addCauseInfo;
         submitFun(that.returnReason.id,that.returnReason).then(res=>{
           console.log('res:',res);
           if(res && res.code === 200){
             that.$message.success(that.returnReason.id ? '修改成功' : '保存成功');
             that.dialogVisible = false;
+            that.getDataList('init');
           }else{
             that.$message.error(res.msg)
           }

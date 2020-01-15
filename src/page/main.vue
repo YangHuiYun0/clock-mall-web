@@ -5,13 +5,13 @@
         <div class="container-fluid cl">
           <span class="title">钟表商城管理后台</span>
           <div class="tit1">
-            <el-dropdown class="user">
+            <el-dropdown class="user"  @command="handleCommand">
               <span class="el-dropdown-link">
                 admin<i class="el-icon-arrow-down el-icon--right"></i>
               </span>
               <el-dropdown-menu slot="dropdown">
-                <el-dropdown-item>个人中心</el-dropdown-item>
-                <el-dropdown-item>退出</el-dropdown-item>
+                <el-dropdown-item command ='userInfo'>个人中心</el-dropdown-item>
+                <el-dropdown-item command = 'exit'>退出</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -75,14 +75,21 @@
 </template>
 
 <script>
+import { getLogout } from "@/api/login";
 export default {
   methods:{
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath);
-    }
+
+    },
+    handleCommand(command){
+      if(command === 'exit'){
+        this.$message.success('退出成功');
+				getLogout().then()
+      }
+    },
   }
 }
 </script>

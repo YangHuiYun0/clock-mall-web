@@ -37,8 +37,7 @@
 </template>
 
 <script>
-  // import {setSupport,getSupport,setCookie,getCookie} from '@/utils/support';
-
+  import { getLogin } from "../api/login";
   export default {
     name: 'login',
     data() {
@@ -70,45 +69,25 @@
       // }
     },
     methods: {
-      showPwd() {
-        if (this.pwdType === 'password') {
-          this.pwdType = ''
-        } else {
-          this.pwdType = 'password'
-        }
-      },
       handleLogin() {
         this.$refs.loginForm.validate(valid => {
           if (!valid) return false;
-          // getLogin({
-          //   userName:this.loginForm.username,
-          //   password:this.loginForm.password
-          // }).then(res=>{
-          //   if(res && res.code=== 200){
-          //     this.$message({
-          //       type: 'success',
-          //       message: '登录成功'
-          //     });
-          //     this.$router.push('/home')
-          //   }else{
-          //     this.$message.error(res.msg)
-          //   }
-          // })
-          this.$message.success('登录成功')
-          this.$router.push('/home')
+          getLogin({
+            loginName:this.loginForm.username,
+            password:this.loginForm.password
+          }).then(res=>{
+            if(res && res.code=== 200){
+              this.$message({
+                type: 'success',
+                message: '登录成功'
+              });
+              this.$router.push('/home')
+            }else{
+              this.$message.error(res.msg)
+            }
+          })
         })
       },
-      handleTry(){
-        this.dialogVisible =true
-      },
-      dialogConfirm(){
-        this.dialogVisible =false;
-        setSupport(true);
-      },
-      dialogCancel(){
-        this.dialogVisible = false;
-        setSupport(false);
-      }
     }
   }
 </script>

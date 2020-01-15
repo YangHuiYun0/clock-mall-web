@@ -12,9 +12,15 @@
             <el-input v-model="dataForm.brandLetter" placeholder="A" show-word-limit 
             maxlength=1  clearable style="width:100px"></el-input>
         </el-form-item>
-         <el-form-item label="品牌排序：" prop="brandSort">
-            <el-input v-model="dataForm.brandSort" placeholder="0-999" show-word-limit 
-            maxlength=3  clearable style="width:400px"></el-input>
+         <el-form-item label="品牌归属类型：" prop="brandType">
+             <el-select v-model="dataForm.brandType" :clearable='false' >
+                <el-option
+                  v-for="item in typeList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.label">
+                </el-option>
+              </el-select>
         </el-form-item>
          <el-form-item>
           <el-button type="success" @click="submitForm" :loading="submitLoading">保存</el-button>
@@ -26,6 +32,7 @@
 </template>
 
 <script>
+import { getBrandInfo,addBrandInfo,updateBrandInfo } from "../../api/goods-manage";
 export default {
   data(){
     const letterRequire = (rule, value, callback) => {
@@ -35,22 +42,14 @@ export default {
         callback();
       }
     }
-
-    const SortRequire = (rule, value, callback) => {
-      if (!String(this.dataForm.brandSort).match(/^\+?[1-9]\d*$/)) {
-        callback(new Error('请输入大于0的整数'));
-      }else{
-        callback();
-      }
-    }
     return{
       submitLoading:false,
       breadCrumbList: [{ title: '品牌管理列表', path: '/brandList' }, { title: '品牌详情' }],
       dataForm:{
-        id:'',
+        id:this.$route.query.id || '',
         brandName:'',
         brandLetter:'',
-        brandSort:'',
+        brandType:'年轻潮牌',
       },
       rules:{
         brandName:[
@@ -60,11 +59,15 @@ export default {
           { required: true, message: '请输入品牌首字母', trigger: 'blur' },
           { required: true, trigger: 'blur', validator: letterRequire }
         ],
-        brandSort:[
-          { required: true, message: '请输入品牌排序', trigger: 'blur' },
-          { required: true, trigger: 'change', validator: SortRequire }
-        ],
       },
+      typeList:[
+        {value:'1',label:'顶级品牌'},
+        {value:'2',label:'奢华品牌'},
+        {value:'3',label:'高级品牌'},
+        {value:'4',label:'轻奢时尚'},
+        {value:'5',label:'年轻潮牌'},
+        {value:'6',label:'智能手表'},
+      ]
     }
   },
   mounted(){
@@ -75,7 +78,7 @@ export default {
     getInfo(){
       const that = this;
         if(that.dataForm.id){
-          getGoods(that.dataForm.id).then(res=>{
+          getBrandInfo(that.dataForm.id).then(res=>{
             if(res && res.code === 200){
               that.dataForm = res.data;
             }else{
@@ -95,7 +98,7 @@ export default {
             return false;
           }
           that.submitLoading = true;
-          const submitFun = that.dataForm.id ? editBrand : addBrand;
+          const submitFun = that.dataForm.id ? updateBrandInfo : addBrandInfo;
           submitFun(that.dataForm.id,that.dataForm).then(res=>{
             console.log('res:',res);
             if(res && res.code === 200){
